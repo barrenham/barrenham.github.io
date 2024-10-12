@@ -6,28 +6,28 @@
   
   <title>OS_LAB 2 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="1.  段表设计GDT,LDT   一个32位系统需要一个GDT，可以同时拥有多个LDT,每一个LDT通过GDT来获取LDT所在的位置   ![](media&#x2F;image2.png)&#123;width&#x3D;&quot;5.760416666666667in&quot; height&#x3D;&quot;0.6354166666666666in&quot;&#125;  在INTEL规范中，第一个GDT表项">
+  <meta name="description" content="1.  段表设计GDT,LDT    一个32位系统需要一个GDT，可以同时拥有多个LDT,每一个LDT通过GDT来获取LDT所在的位置   ![](media&#x2F;image2.png)&#123;width&#x3D;&quot;5.760416666666667in&quot; height&#x3D;&quot;0.6354166666666666in&quot;&#125;  在INTEL规范中，第一个GDT表">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OS_LAB 2">
-<meta property="og:url" content="http://example.com/2024/10/12/OS-LAB-2/index.html">
+<meta property="og:url" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1.  段表设计GDT,LDT   一个32位系统需要一个GDT，可以同时拥有多个LDT,每一个LDT通过GDT来获取LDT所在的位置   ![](media&#x2F;image2.png)&#123;width&#x3D;&quot;5.760416666666667in&quot; height&#x3D;&quot;0.6354166666666666in&quot;&#125;  在INTEL规范中，第一个GDT表项">
+<meta property="og:description" content="1.  段表设计GDT,LDT    一个32位系统需要一个GDT，可以同时拥有多个LDT,每一个LDT通过GDT来获取LDT所在的位置   ![](media&#x2F;image2.png)&#123;width&#x3D;&quot;5.760416666666667in&quot; height&#x3D;&quot;0.6354166666666666in&quot;&#125;  在INTEL规范中，第一个GDT表">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/.com//%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-09-27%20220558.png">
-<meta property="og:image" content="http://example.com/.com//image12.png">
-<meta property="og:image" content="http://example.com/.com//image50.png">
-<meta property="og:image" content="http://example.com/.com//image51.png">
-<meta property="og:image" content="http://example.com/.com//image52.png">
-<meta property="og:image" content="http://example.com/.com//image53.png">
-<meta property="og:image" content="http://example.com/.com//image54.png">
-<meta property="og:image" content="http://example.com/.com//image55.png">
-<meta property="og:image" content="http://example.com/.com//image56.png">
-<meta property="og:image" content="http://example.com/.com//image57.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic1.png">
+<meta property="og:image" content="http://barrenham.github.io/media/image12.png">
+<meta property="og:image" content="http://barrenham.github.io/media/image50.png">
+<meta property="og:image" content="http://barrenham.github.io/media/image51.png">
+<meta property="og:image" content="http://barrenham.github.io/media/image52.png">
+<meta property="og:image" content="http://barrenham.github.io/media/image53.png">
+<meta property="og:image" content="http://barrenham.github.io/media/image54.png">
+<meta property="og:image" content="http://barrenham.github.io/media/image55.png">
+<meta property="og:image" content="http://barrenham.github.io/media/image56.png">
+<meta property="og:image" content="http://barrenham.github.io/media/image57.png">
 <meta property="article:published_time" content="2024-10-12T14:37:34.000Z">
-<meta property="article:modified_time" content="2024-10-12T15:12:36.452Z">
+<meta property="article:modified_time" content="2024-10-12T15:37:20.357Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/.com//%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-09-27%20220558.png">
+<meta name="twitter:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic1.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -75,7 +75,7 @@
         <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://barrenham.github.io"></form>
       </div>
     </div>
   </div>
@@ -104,7 +104,8 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="1-段表设计GDT-LDT"><a href="#1-段表设计GDT-LDT" class="headerlink" title="1.  段表设计GDT,LDT"></a>1.  段表设计GDT,LDT</h1><p><img src="/.com//%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-09-27%20220558.png" alt="截图" title="intel ia32手册截图">  </p>
+        <h1 id="1-段表设计GDT-LDT"><a href="#1-段表设计GDT-LDT" class="headerlink" title="1.  段表设计GDT,LDT"></a>1.  段表设计GDT,LDT</h1><img src="/2024/10/12/OS-LAB-2/pic1.png" class title="intel ia32手册截图 截图">  
+
 <pre><code>一个32位系统需要一个GDT，可以同时拥有多个LDT,每一个LDT通过GDT来获取LDT所在的位置  
 ![](media/image2.png)&#123;width=&quot;5.760416666666667in&quot;
 height=&quot;0.6354166666666666in&quot;&#125;
@@ -178,7 +179,7 @@ height=&quot;3.332638888888889in&quot;&#125;
 <p>所以该段的线性地址范围为(0x0—(0x0+SegCode32Len-1))<br>{如果之后没有对段的基地址进行变换的话}</p>
 <h1 id="1-代码流程设计"><a href="#1-代码流程设计" class="headerlink" title="1.  代码流程设计"></a>1.  代码流程设计</h1><pre><code>根据PMTEST1.ASM代码所示，代码流程如下:(设置页表可能是之后的内容)
 </code></pre>
-<p><img src="/.com//image12.png">{width&#x3D;”2.376388888888889in”<br>height&#x3D;”2.7604166666666665in”}</p>
+<p><img src="/media/image12.png">{width&#x3D;”2.376388888888889in”<br>height&#x3D;”2.7604166666666665in”}</p>
 <pre><code>![IMG\_256](media/image13.png)&#123;width=&quot;5.279861111111111in&quot;
 height=&quot;2.504166666666667in&quot;&#125;
 
@@ -402,7 +403,7 @@ height=&quot;1.3256944444444445in&quot;&#125;
 </code></pre>
 <h1 id="2-从实模式到保护模式，关键步骤有哪些？为什么要关中断？为什么要打开A20地址线？从保护模式切换回实模式，又需要哪些步骤？"><a href="#2-从实模式到保护模式，关键步骤有哪些？为什么要关中断？为什么要打开A20地址线？从保护模式切换回实模式，又需要哪些步骤？" class="headerlink" title="2.从实模式到保护模式，关键步骤有哪些？为什么要关中断？为什么要打开A20地址线？从保护模式切换回实模式，又需要哪些步骤？"></a>2.从实模式到保护模式，关键步骤有哪些？为什么要关中断？为什么要打开A20地址线？从保护模式切换回实模式，又需要哪些步骤？</h1><p>答:该问题已经在实验步骤2中进行了解答，不再赘述</p>
 <p>附:A20地址线解答</p>
-<p><img src="/.com//image50.png">{width&#x3D;”5.761111111111111in” height&#x3D;”1.78125in”}</p>
+<p><img src="/media/image50.png">{width&#x3D;”5.761111111111111in” height&#x3D;”1.78125in”}</p>
 <p>可以说，A20作为回环地址，能够将实模式下的超出0XFFFF的内容舍去，而打开A20，可以让EIP进入32位模式</p>
 <h1 id="3解释不同权限代码的切换原理，call-jmp，retf使用场景如何，能够互换吗？"><a href="#3解释不同权限代码的切换原理，call-jmp，retf使用场景如何，能够互换吗？" class="headerlink" title="3解释不同权限代码的切换原理，call, jmp，retf使用场景如何，能够互换吗？"></a>3解释不同权限代码的切换原理，call, jmp，retf使用场景如何，能够互换吗？</h1><p>答:在实验步骤5中解答了不同权限代码的切换原理，接下来阐述call ，jmp<br>，retf的使用场景:</p>
 <p>Call：</p>
@@ -417,16 +418,16 @@ height=&quot;1.3256944444444445in&quot;&#125;
 <li><p>通过task-gate的跳转</p>
 <p>不同的call指令所执行的指令数不同。</p>
 <p>Call一般与ret指令配合使用，下面是call与return的配合:</p>
-<p><img src="/.com//image51.png">{width&#x3D;”4.611111111111111in”<br>height&#x3D;”3.6243055555555554in”}</p>
-<p><img src="/.com//image52.png">{width&#x3D;”5.204861111111111in”<br>height&#x3D;”4.647222222222222in”}</p>
-<p><img src="/.com//image53.png">{width&#x3D;”5.759027777777778in”<br>height&#x3D;”1.4055555555555554in”}</p>
-<p><img src="/.com//image54.png">{width&#x3D;”5.766666666666667in”<br>height&#x3D;”1.0381944444444444in”}</p>
-<p><img src="/.com//image55.png">{width&#x3D;”5.761805555555555in”<br>height&#x3D;”1.051388888888889in”}</p>
-<p><img src="/.com//image56.png">{width&#x3D;”5.760416666666667in”<br>height&#x3D;”0.8680555555555556in”}</p>
+<p><img src="/media/image51.png">{width&#x3D;”4.611111111111111in”<br>height&#x3D;”3.6243055555555554in”}</p>
+<p><img src="/media/image52.png">{width&#x3D;”5.204861111111111in”<br>height&#x3D;”4.647222222222222in”}</p>
+<p><img src="/media/image53.png">{width&#x3D;”5.759027777777778in”<br>height&#x3D;”1.4055555555555554in”}</p>
+<p><img src="/media/image54.png">{width&#x3D;”5.766666666666667in”<br>height&#x3D;”1.0381944444444444in”}</p>
+<p><img src="/media/image55.png">{width&#x3D;”5.761805555555555in”<br>height&#x3D;”1.051388888888889in”}</p>
+<p><img src="/media/image56.png">{width&#x3D;”5.760416666666667in”<br>height&#x3D;”0.8680555555555556in”}</p>
 <p>我认为jmp和call是无法互换的</p>
 <p>Jmp是一个跳转指令，它无法进行跨特权级的跳转，也就是说，无法进行栈的切换</p>
 <p>其次在call-gate特权级检查方面，jmp只能在同级之间转换，而call可以跨级别转换</p>
-<p><img src="/.com//image57.png">{width&#x3D;”5.760416666666667in”<br>height&#x3D;”1.6256944444444446in”}</p>
+<p><img src="/media/image57.png">{width&#x3D;”5.760416666666667in”<br>height&#x3D;”1.6256944444444446in”}</p>
 <p>Call在设计上与ret有一定关联，而跳转指令没有</p>
 </li>
 </ol>
@@ -434,7 +435,7 @@ height=&quot;1.3256944444444445in&quot;&#125;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/12/OS-LAB-2/" data-id="cm26awvhf0000dsvcdgmv94no" data-title="OS_LAB 2" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://barrenham.github.io/2024/10/12/OS-LAB-2/" data-id="cm26bvsln000038vcevw76rpf" data-title="OS_LAB 2" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
