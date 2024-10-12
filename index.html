@@ -94,20 +94,15 @@
         <h1 id="1-段表设计GDT-LDT"><a href="#1-段表设计GDT-LDT" class="headerlink" title="1.  段表设计GDT,LDT"></a>1.  段表设计GDT,LDT</h1><img src="/2024/10/12/OS-LAB-2/pic1.png" class title="intel ia32手册截图 截图">  
 
 <pre><code>一个32位系统需要一个GDT，可以同时拥有多个LDT,每一个LDT通过GDT来获取LDT所在的位置  
-![](media/image2.png)&#123;width=&quot;5.760416666666667in&quot;
-height=&quot;0.6354166666666666in&quot;&#125;
+&#123;% asset_img pic2.png  %&#125;
 
-在INTEL规范中，第一个GDT表项应该是不被使用的，当cpu试图通过该selector来读取内存时，会返回GP（general
-protection)
+在INTEL规范中，第一个GDT表项应该是不被使用的，当cpu试图通过该selector来读取内存时，会返回GP（general protection)
 错误，该表项是希望系统初始化selector指向该表项，并在之后进行更改，如果没有更改，那么selector可以被视为未进行赋值，从而产生异常对计算机系统进行保护。
 
-![](media/image3.png)&#123;width=&quot;5.763194444444444in&quot;
-height=&quot;0.7736111111111111in&quot;&#125;
+&#123;% asset_img 屏幕截图%202024-09-27%20222021.png  %&#125;
 
 INTEL文档中对GDT的位置进行了建议:GDT的起始地址（base address)
-对齐8字节边界（
-
-个人认为:BASE ADDRESS % 0x1000 = 0) 来增强cpu的处理能力，
+对齐8字节边界（个人认为:BASE ADDRESS % 0x1000 = 0) 来增强cpu的处理能力，
 
 同时，规定 BASE ADDRESS + LIMIT = GDT\_END ADDRESS
 从而指定GDT的范围大小。
@@ -422,7 +417,7 @@ height=&quot;1.3256944444444445in&quot;&#125;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://barrenham.github.io/2024/10/12/OS-LAB-2/" data-id="cm26bvsln000038vcevw76rpf" data-title="OS_LAB 2" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://barrenham.github.io/2024/10/12/OS-LAB-2/" data-id="cm26c1y820000ssvcbbgicfld" data-title="OS_LAB 2" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -473,7 +468,7 @@ height=&quot;1.3256944444444445in&quot;&#125;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://barrenham.github.io/2024/10/12/hello-world/" data-id="cm26bvslq000138vcadyr5bh6" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://barrenham.github.io/2024/10/12/hello-world/" data-id="cm26c1y860001ssvc5s8z2v4n" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
