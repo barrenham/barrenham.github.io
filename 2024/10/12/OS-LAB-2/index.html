@@ -6,25 +6,73 @@
   
   <title>OS_LAB 2 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="1.  段表设计GDT,LDT    一个32位系统需要一个GDT，可以同时拥有多个LDT,每一个LDT通过GDT来获取LDT所在的位置   &#123;% asset_img pic2.png  %&#125;  在INTEL规范中，第一个GDT表项应该是不被使用的，当cpu试图通过该selector来读取内存时，会返回GP（general protection) 错误，该表项是希望系统初始化s">
+  <meta name="description" content="1.  段表设计GDT,LDT    一个32位系统需要一个GDT，可以同时拥有多个LDT,每一个LDT通过GDT来获取LDT所在的位置     在INTEL规范中，第一个GDT表项应该是不被使用的，当cpu试图通过该selector来读取内存时，会返回GP（general protection)错误，该表项是希望系统初始化selector指向该表项，并在之后进行更改，如果没有更改，那么selec">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OS_LAB 2">
 <meta property="og:url" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1.  段表设计GDT,LDT    一个32位系统需要一个GDT，可以同时拥有多个LDT,每一个LDT通过GDT来获取LDT所在的位置   &#123;% asset_img pic2.png  %&#125;  在INTEL规范中，第一个GDT表项应该是不被使用的，当cpu试图通过该selector来读取内存时，会返回GP（general protection) 错误，该表项是希望系统初始化s">
+<meta property="og:description" content="1.  段表设计GDT,LDT    一个32位系统需要一个GDT，可以同时拥有多个LDT,每一个LDT通过GDT来获取LDT所在的位置     在INTEL规范中，第一个GDT表项应该是不被使用的，当cpu试图通过该selector来读取内存时，会返回GP（general protection)错误，该表项是希望系统初始化selector指向该表项，并在之后进行更改，如果没有更改，那么selec">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic1.png">
-<meta property="og:image" content="http://barrenham.github.io/media/image12.png">
-<meta property="og:image" content="http://barrenham.github.io/media/image50.png">
-<meta property="og:image" content="http://barrenham.github.io/media/image51.png">
-<meta property="og:image" content="http://barrenham.github.io/media/image52.png">
-<meta property="og:image" content="http://barrenham.github.io/media/image53.png">
-<meta property="og:image" content="http://barrenham.github.io/media/image54.png">
-<meta property="og:image" content="http://barrenham.github.io/media/image55.png">
-<meta property="og:image" content="http://barrenham.github.io/media/image56.png">
-<meta property="og:image" content="http://barrenham.github.io/media/image57.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic2.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic3.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic4.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic5.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic6.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic7.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic8.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic9.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic10.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic12.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic11.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic14.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic15.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic16.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic17.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic18.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic19.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic20.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic21.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic22.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic23.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic24.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic25.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic26.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic27.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic28.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic29.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic30.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic31.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic32.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic1.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic33.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic34.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic35.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic36.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic37.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic38.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic39.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic40.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic41.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic42.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic43.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic44.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic45.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic46.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic47.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic48.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic49.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic50.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic51.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic52.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic53.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic54.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic55.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic56.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic57.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic58.png">
 <meta property="article:published_time" content="2024-10-12T14:37:34.000Z">
-<meta property="article:modified_time" content="2024-10-12T15:50:05.936Z">
+<meta property="article:modified_time" content="2024-10-12T16:36:02.362Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic1.png">
@@ -106,299 +154,176 @@
       
         <h1 id="1-段表设计GDT-LDT"><a href="#1-段表设计GDT-LDT" class="headerlink" title="1.  段表设计GDT,LDT"></a>1.  段表设计GDT,LDT</h1><img src="/2024/10/12/OS-LAB-2/pic1.png" class title="intel ia32手册截图 截图">  
 
-<pre><code>一个32位系统需要一个GDT，可以同时拥有多个LDT,每一个LDT通过GDT来获取LDT所在的位置  
-&#123;% asset_img pic2.png  %&#125;
+<p>一个32位系统需要一个GDT，可以同时拥有多个LDT,每一个LDT通过GDT来获取LDT所在的位置  </p>
+<img src="/2024/10/12/OS-LAB-2/pic2.png" class>
 
-在INTEL规范中，第一个GDT表项应该是不被使用的，当cpu试图通过该selector来读取内存时，会返回GP（general protection)
-错误，该表项是希望系统初始化selector指向该表项，并在之后进行更改，如果没有更改，那么selector可以被视为未进行赋值，从而产生异常对计算机系统进行保护。
+<p>在INTEL规范中，第一个GDT表项应该是不被使用的，当cpu试图通过该selector来读取内存时，会返回GP（general protection)<br>错误，该表项是希望系统初始化selector指向该表项，并在之后进行更改，如果没有更改，那么selector可以被视为未进行赋值，从而产生异常对计算机系统进行保护。</p>
+<img src="/2024/10/12/OS-LAB-2/pic3.png" class>
 
-&#123;% asset_img 屏幕截图%202024-09-27%20222021.png  %&#125;
+<p>INTEL文档中对GDT的位置进行了建议:GDT的起始地址（base address)<br>对齐8字节边界（个人认为:BASE ADDRESS % 0x1000 &#x3D; 0) 来增强cpu的处理能力，</p>
+<p>同时，规定 <em><strong>BASE ADDRESS + LIMIT &#x3D; GDT_END ADDRESS</strong></em><br>从而指定GDT的范围大小。</p>
+<img src="/2024/10/12/OS-LAB-2/pic4.png" class title="截图">
 
-INTEL文档中对GDT的位置进行了建议:GDT的起始地址（base address)
-对齐8字节边界（个人认为:BASE ADDRESS % 0x1000 = 0) 来增强cpu的处理能力，
+<p>值得注意的是，执行SGDT和SLDT时，应该让存储地址对齐，从而避免可能的用户模式下的对齐检查而出错</p>
+<p>总体段式设计:</p>
+<img src="/2024/10/12/OS-LAB-2/pic5.png" class title="截图">
 
-同时，规定 BASE ADDRESS + LIMIT = GDT\_END ADDRESS
-从而指定GDT的范围大小。
+<p>该段式设计的最终目的是从一个逻辑地址转换为线性地址</p>
+<p><strong>(如果开启分页，那么还需要从线性地址通过页表转化为物理地址，否则直接转换为物理地址)</strong></p>
+<img src="/2024/10/12/OS-LAB-2/pic6.png" class title="截图">
+<p>PM.INC含义:</p>
+<img src="/2024/10/12/OS-LAB-2/pic7.png" class title="截图">
 
-![](media/image4.png)&#123;width=&quot;5.7659722222222225in&quot;
-height=&quot;3.609722222222222in&quot;&#125;
+<p>GDT段分布如下:</p>
+<img src="/2024/10/12/OS-LAB-2/pic8.png" class title="屏幕截图 2024-09-27 224117">
 
-值得注意的是，执行SGDT和SLDT时，应该让存储地址对齐，从而避免可能的用户模式下的对齐检查而出错
+<p>注意到，该Descriptor是一个宏展开，其中需要三个参数，分别为%1，%2，%3，</p>
+<p>根据上图数据，不难看出，%1代表段基址，%2代表段的界限，%3代表段的属性</p>
+<p>比如说:</p>
+<img src="/2024/10/12/OS-LAB-2/pic9.png" class>
 
-总体段式设计:
+<img src="/2024/10/12/OS-LAB-2/pic10.png" class>
 
-![](media/image5.png)&#123;width=&quot;5.766666666666667in&quot;
-height=&quot;2.4555555555555557in&quot;&#125;
+<img src="/2024/10/12/OS-LAB-2/pic12.png" class>
 
-该段式设计的最终目的是从一个逻辑地址转换为线性地址
+<img src="/2024/10/12/OS-LAB-2/pic11.png" class>
 
-（如果开启分页，那么还需要从线性地址通过页表转化为物理地址，否则直接转换为物理地址)
-
-![](media/image6.png)&#123;width=&quot;5.758333333333334in&quot;
-height=&quot;0.9805555555555555in&quot;&#125;
-
-PM.INC含义:
-
-![](media/image7.png)&#123;width=&quot;5.764583333333333in&quot; height=&quot;1.4in&quot;&#125;
-
-GDT段分布如下:
-
-![屏幕截图 2024-09-27
-224117](media/image8.png)&#123;width=&quot;5.759722222222222in&quot;
-height=&quot;2.951388888888889in&quot;&#125;
-
-注意到，该Descriptor是一个宏展开，其中需要三个参数，分别为%1，%2，%3，
-
-根据上图数据，不难看出，%1代表段基址，%2代表段的界限，%3代表段的属性
-
-比如说:
-
-![](media/image9.png)&#123;width=&quot;5.7659722222222225in&quot;
-height=&quot;0.2111111111111111in&quot;&#125;
-
-![](media/image10.png)&#123;width=&quot;3.848611111111111in&quot;
-height=&quot;2.3618055555555557in&quot;&#125;
-
-![](media/image11.png)&#123;width=&quot;5.007638888888889in&quot;
-height=&quot;3.332638888888889in&quot;&#125;
-
-从中可以得知，该段的基址为0x0,
-由于DA\_C=0x98，查表可知，该段的类型为代码段，且只可执行，不可被读，且该段还没有被访问过。
-
-同时，P=1,S=1，代表该段是一个系统段且在MEM中存在
-
-由于DA\_32=0x4000,对应D/B位，将该位设为1，代表该可执行代码段执行过程中将二进制代码翻译成32位指令
-</code></pre>
+<p>从中可以得知，该段的基址为0x0,<br>由于DA_C&#x3D;0x98，查表可知，该段的类型为代码段，且只可执行，不可被读，且该段还没有被访问过。</p>
+<p>同时，P&#x3D;1,S&#x3D;1，代表该段是一个系统段且在MEM中存在</p>
+<p>由于DA_32&#x3D;0x4000,对应D&#x2F;B位，将该位设为1，代表该可执行代码段执行过程中将二进制代码翻译成32位指令</p>
 <p>该段的limit为SegCode32Len-1，</p>
 <p>结合上面的D&#x2F;B位可以得知该段的大小LABEL_SEG_CODE32所在段的大小</p>
-<p>所以该段的线性地址范围为(0x0—(0x0+SegCode32Len-1))<br>{如果之后没有对段的基地址进行变换的话}</p>
-<h1 id="1-代码流程设计"><a href="#1-代码流程设计" class="headerlink" title="1.  代码流程设计"></a>1.  代码流程设计</h1><pre><code>根据PMTEST1.ASM代码所示，代码流程如下:(设置页表可能是之后的内容)
-</code></pre>
-<p><img src="/media/image12.png">{width&#x3D;”2.376388888888889in”<br>height&#x3D;”2.7604166666666665in”}</p>
-<pre><code>![IMG\_256](media/image13.png)&#123;width=&quot;5.279861111111111in&quot;
-height=&quot;2.504166666666667in&quot;&#125;
+<p>所以该段的线性地址范围为 <strong>(0x0—(0x0+SegCode32Len-1))</strong><br>{如果之后没有对段的基地址进行变换的话}</p>
+<h1 id="1-代码流程设计"><a href="#1-代码流程设计" class="headerlink" title="1.  代码流程设计"></a>1.  代码流程设计</h1><p>根据PMTEST1.ASM代码所示，代码流程如下:(设置页表可能是之后的内容)</p>
+<img src="/2024/10/12/OS-LAB-2/pic14.png" class>
 
-从实模式转换为保护模式的步骤如下所示
+<p>从实模式转换为保护模式的步骤如下所示</p>
+<img src="/2024/10/12/OS-LAB-2/pic15.png" class title="截图">
 
-![](media/image14.png)&#123;width=&quot;5.764583333333333in&quot;
-height=&quot;4.876388888888889in&quot;&#125;
+<p>如果将jmp selector:offset该为jmp offset会发生什么</p>
+<p>没有反应，程序正常继续运行,但是P并没有显示</p>
+<p>原因:</p>
+<img src="/2024/10/12/OS-LAB-2/pic16.png" class title="截图">
 
-如果将jmp selector:offset该为jmp offset会发生什么
+<p>原先用于mov<br>ax，SELECTORVIDEO的指令0x0010b866由于没有通过cs转换转为32位程序，仍然保持cs为0，此时仍然执行16位指令集，导致mov<br>ax，0x0010和mov<br>gs,ax合体成为一个指令0xe88e0010b866,这是由于最后一个字节为0x66，在16位程序里被暂时解释为32位指令</p>
+<p>我们可以找到该说明:</p>
+<img src="/2024/10/12/OS-LAB-2/pic17.png" class title="截图">
 
-没有反应，程序正常继续运行,但是P并没有显示
+<img src="/2024/10/12/OS-LAB-2/pic18.png" class>
 
-原因:
+<p>(图为正确解释方式)</p>
+<img src="/2024/10/12/OS-LAB-2/pic19.png" class>
 
-![](media/image15.png)&#123;width=&quot;5.764583333333333in&quot;
-height=&quot;2.2569444444444446in&quot;&#125;
+<p>(图为错误解释方式)</p>
+<p>关于程序继续运行，但是没有GP异常，通过调用SREG命令，发现cs此时仍然有效，初步猜测为兼容性考虑，对于低0xFFFF的内容，仍然可以继续执行。</p>
+<p>关于关中断cli，是因为该系统现在状况的需要，关中断是为了不在程序运行中受可屏蔽中断的影响，由于此时IDT所在的表的地址为0x0,有些中断会导致cs被转化为一个超出gdt段表范围的值，此时会出错，所以关中断是必要的。</p>
+<h1 id="2-GDT的转换以及从保护模式切换到实模式的方法"><a href="#2-GDT的转换以及从保护模式切换到实模式的方法" class="headerlink" title="2.  GDT的转换以及从保护模式切换到实模式的方法"></a>2.  GDT的转换以及从保护模式切换到实模式的方法</h1><img src="/2024/10/12/OS-LAB-2/pic20.png" class>
 
-原先用于mov
-ax，SELECTORVIDEO的指令0x0010b866由于没有通过cs转换转为32位程序，仍然保持cs为0，此时仍然执行16位指令集，导致mov
-ax，0x0010和mov
-gs,ax合体成为一个指令0xe88e0010b866,这是由于最后一个字节为0x66，在16位程序里被暂时解释为32位指令
+<img src="/2024/10/12/OS-LAB-2/pic21.png" class>
 
-我们可以找到该说明:
+<p>从保护模式转换为实模式的代码段</p>
+<p>其中最重要的是将cr0的最低位置0，然后将cs转换为0，根据下图所示，就是将PE置为0，取消保护模式，通过jmp刷新流水线，然后，传播0到ds，es，ss中</p>
+<img src="/2024/10/12/OS-LAB-2/pic22.png" class>
 
-![](media/image16.png)&#123;width=&quot;5.759722222222222in&quot;
-height=&quot;0.8486111111111111in&quot;&#125;
+<img src="/2024/10/12/OS-LAB-2/pic23.png" class title="截图">
 
-![](media/image17.png)&#123;width=&quot;5.761805555555555in&quot;
-height=&quot;0.5708333333333333in&quot;&#125;
+<p>从保护模式转换成实模式如下图所示</p>
+<img src="/2024/10/12/OS-LAB-2/pic24.png" class title="截图">
 
-（图为正确解释方式)
+<img src="/2024/10/12/OS-LAB-2/pic25.png" class title="截图">
 
-![](media/image18.png)&#123;width=&quot;5.754861111111111in&quot;
-height=&quot;0.7548611111111111in&quot;&#125;
+<img src="/2024/10/12/OS-LAB-2/pic26.png" class title="截图">
 
-(图为错误解释方式)
+<p>可以看到，在操作cr0寄存器之前，首先将通过jmp指令将cs变为一个16位系统段寄存器，可寻址64KB，然后将ds等段寄存器设置为selectorNormal，这样就使得这些段的寻址范围变为64KB，由于没有对IDT表进行操作，所以该IDT表仍然是16位系统的，不需要操作，然后将cr0的PE位设为0，通过长跳转将cs设置为0，然后将ss,ds等段寄存器更新，最后将中断打开。</p>
+<img src="/2024/10/12/OS-LAB-2/pic27.png" class title="截图">
 
-关于程序继续运行，但是没有GP异常，通过调用SREG命令，发现cs此时仍然有效，初步猜测为兼容性考虑，对于低0xFFFF的内容，仍然可以继续执行。
+<p>由于该代码没有页表，所以不需要考虑映射的问题</p>
+<p>我们可以发现，此时CS，DS,<br>ES等已经位于正确的位置，IDT表仍然是16位系统下的中断表，成功将系统从保护模式转换成实模式</p>
+<img src="/2024/10/12/OS-LAB-2/pic28.png" class title="截图">
 
-关于关中断cli，是因为该系统现在状况的需要，关中断是为了不在程序运行中受可屏蔽中断的影响，由于此时IDT所在的表的地址为0x0,有些中断会导致cs被转化为一个超出gdt段表范围的值，此时会出错，所以关中断是必要的。
-</code></pre>
-<h1 id="2-GDT的转换以及从保护模式切换到实模式的方法"><a href="#2-GDT的转换以及从保护模式切换到实模式的方法" class="headerlink" title="2.  GDT的转换以及从保护模式切换到实模式的方法"></a>2.  GDT的转换以及从保护模式切换到实模式的方法</h1><pre><code>![](media/image19.png)&#123;width=&quot;5.768055555555556in&quot;
-height=&quot;3.7569444444444446in&quot;&#125;
+<p>该程序执行结果</p>
+<img src="/2024/10/12/OS-LAB-2/pic29.png" class title="截图">
+<p>第二次执行结果</p>
+<p>该程序将es段所在位置的8个字节先显示，再修改，然后显示，可以看到，第一次全0，然后被修改，第二次执行时该位置保持不变，所以出现上述结果</p>
+<h1 id="3-LDT的转换"><a href="#3-LDT的转换" class="headerlink" title="3.  LDT的转换"></a>3.  LDT的转换</h1><p>下图是一个段寄存器在保护模式下的具体表现形式</p>
+<img src="/2024/10/12/OS-LAB-2/pic30.png" class title="截图">
 
-![](media/image20.png)&#123;width=&quot;5.764583333333333in&quot;
-height=&quot;3.59375in&quot;&#125;
+<img src="/2024/10/12/OS-LAB-2/pic31.png" class title="截图">
 
-从保护模式转换为实模式的代码段
+<p>首先将ldtr的值设置为gdt中的LDT段值，通过SelectorLDTCodeA跳入该LDT段中，此段通过设置TI位保证使用LDT表中的内容，</p>
+<p>值得注意的是，LDT表中不存在NULL<br>SEGMENT，这可能是因为LDT需要预先处理的原因</p>
+<img src="/2024/10/12/OS-LAB-2/pic32.png" class title="截图">
 
-其中最重要的是将cr0的最低位置0，然后将cs转换为0，根据下图所示，就是将PE置为0，取消保护模式，通过jmp刷新流水线，然后，传播0到ds，es，ss中
+<p>上述为程序执行结果，可以看到，程序正确执行了输出L命令</p>
+<p>我们仍然搬出下面这个图，用来说明LDT转换</p>
+<img src="/2024/10/12/OS-LAB-2/pic1.png" class title="截图">
 
-![](media/image21.png)&#123;width=&quot;5.761805555555555in&quot;
-height=&quot;0.7152777777777778in&quot;&#125;
+<p>当TI位为1时，segment就会去寻找LDT表，该selector所对应的index被解释为LDT索引，在每一次LDT切换前，需要注意LDTR寄存器是否与所要切换的LDT保持一致。</p>
+<h1 id="4-特权级切换以及段权限控制"><a href="#4-特权级切换以及段权限控制" class="headerlink" title="4.  特权级切换以及段权限控制"></a>4.  特权级切换以及段权限控制</h1><p>特权级如下图所示：</p>
+<img src="/2024/10/12/OS-LAB-2/pic33.png" class title="截图">
 
-![](media/image22.png)&#123;width=&quot;4.533333333333333in&quot;
-height=&quot;3.939583333333333in&quot;&#125;
+<p>值得注意的是，如果一个违反特权级的行为发生了，同样会产生GP异常。</p>
+<img src="/2024/10/12/OS-LAB-2/pic34.png" class title="截图">
+<p>CPL概念如下:</p>
+<img src="/2024/10/12/OS-LAB-2/pic35.png" class title="截图">
 
-从保护模式转换成实模式如下图所示
+<p>简而言之，CPL是通过CS,SS在段表中的DPL控制的，一般来说，发生CS切换时，处理器会改变CPL的值(在一致性代码段下，CPL保持不变)</p>
+<p>DPL概念如下:</p>
+<img src="/2024/10/12/OS-LAB-2/pic36.png" class title="截图">
 
-![](media/image23.png)&#123;width=&quot;5.7652777777777775in&quot;
-height=&quot;4.743055555555555in&quot;&#125;
+<p>RPL的概念如下:</p>
+<img src="/2024/10/12/OS-LAB-2/pic37.png" class title="截图">
 
-![](media/image24.png)&#123;width=&quot;5.759722222222222in&quot;
-height=&quot;0.6652777777777777in&quot;&#125;
+<p>RPL是存放在cs，ds等寄存器中的权限级别，用于提供更高能力的权限控制</p>
+<p>整体工作流程如下:</p>
+<img src="/2024/10/12/OS-LAB-2/pic38.png" class title="截图">
 
-![](media/image25.png)&#123;width=&quot;5.766666666666667in&quot;
-height=&quot;0.45069444444444445in&quot;&#125;
+<img src="/2024/10/12/OS-LAB-2/pic39.png" class title="截图">
+<p>一般情况下可以认为是这样的：</p>
+<p>Max(CPL,RPL) &lt;&#x3D;DPL ? ACCESS : NOT ACCESS ;</p>
+<p>在门和其他一些情况下，可能会更加复杂</p>
+<p>6.调用门:</p>
+<img src="/2024/10/12/OS-LAB-2/pic40.png" class title="截图">
 
-可以看到，在操作cr0寄存器之前，首先将通过jmp指令将cs变为一个16位系统段寄存器，可寻址64KB，然后将ds等段寄存器设置为selectorNormal，这样就使得这些段的寻址范围变为64KB，由于没有对IDT表进行操作，所以该IDT表仍然是16位系统的，不需要操作，然后将cr0的PE位设为0，通过长跳转将cs设置为0，然后将ss,ds等段寄存器更新，最后将中断打开。
+<img src="/2024/10/12/OS-LAB-2/pic41.png" class title="截图">
 
-![](media/image26.png)&#123;width=&quot;5.761805555555555in&quot;
-height=&quot;0.22847222222222222in&quot;&#125;
+<p>在调用门中，原先程序的OFFSET并没有使用，而是使用CALL-GATE中的OFFSET与segment<br>table中的BASE ADDR联合使用.</p>
+<p>对于d文件夹下的代码分析如下：</p>
+<img src="/2024/10/12/OS-LAB-2/pic42.png" class title="截图">
 
-由于该代码没有页表，所以不需要考虑映射的问题
+<p>在该程序中，CALL-GATE的DPL被设置为0，这说明只有特权级为0的程序才可以访问它，并且该门所指向的代码段是非一致性代码段，由于该门的offset为0，当特权级为0的代码调用CALL-GATE时，程序会指向CODE_DEST的起始位置。</p>
+<img src="/2024/10/12/OS-LAB-2/pic43.png" class title="截图">
 
-我们可以发现，此时CS，DS,
-ES等已经位于正确的位置，IDT表仍然是16位系统下的中断表，成功将系统从保护模式转换成实模式
+<p>该代码在c文件夹的代码的基础上，调用了CALL-GATE，从而指向SelectorCodeDest:0</p>
+<p>执行结果如下所示:</p>
+<img src="/2024/10/12/OS-LAB-2/pic44.png" class title="截图">
 
-![](media/image27.png)&#123;width=&quot;4.28125in&quot;
-height=&quot;1.1118055555555555in&quot;&#125;
+<img src="/2024/10/12/OS-LAB-2/pic45.png" class title="截图">
 
-该程序执行结果
+<p>TSS段的具体表现形式:</p>
+<img src="/2024/10/12/OS-LAB-2/pic46.png" class title="截图">
 
-![](media/image28.png)&#123;width=&quot;4.28125in&quot;
-height=&quot;0.9479166666666666in&quot;&#125;
+<p>当一个CALL-GATE触发时，如果会产生向更高特权级的非一致性CODE<br>SEGMENT的转换，那么一个会发生栈的转换，该转换通过TSS段来实现，通过读取TSS段中的相应特权级的段的栈位置，将栈转换到特定位置，当调用发生，这两个栈会发生的变化如下图所示:</p>
+<img src="/2024/10/12/OS-LAB-2/pic47.png" class title="截图">
 
-第二次执行结果
+<p>有了上述的图像，下面的代码便不难解释:</p>
+<img src="/2024/10/12/OS-LAB-2/pic48.png" class title="截图">
 
-该程序将es段所在位置的8个字节先显示，再修改，然后显示，可以看到，第一次全0，然后被修改，第二次执行时该位置保持不变，所以出现上述结果
-</code></pre>
-<h1 id="3-LDT的转换"><a href="#3-LDT的转换" class="headerlink" title="3.  LDT的转换"></a>3.  LDT的转换</h1><pre><code>下图是一个段寄存器在保护模式下的具体表现形式
+<p>该代码通过这几个push在0特权栈的栈上压入3特权栈的ss，esp，3特权代码段的cs，eip，通过retf长返回指令读取栈区内容，然后将指令转到特权级3所在的代码段上，从而实现从高特权级到低特权级的转换</p>
+<p>幸好，在特权级为3时，gs的DPL&#x3D;3，可以正常运行</p>
+<img src="/2024/10/12/OS-LAB-2/pic49.png" class title="截图">
 
-![](media/image29.png)&#123;width=&quot;5.761805555555555in&quot;
-height=&quot;1.65625in&quot;&#125;
+<p>所以，最后的结果为：</p>
+<img src="/2024/10/12/OS-LAB-2/pic50.png" class title="截图">
 
-![](media/image30.png)&#123;width=&quot;5.393055555555556in&quot; height=&quot;1.125in&quot;&#125;
-
-首先将ldtr的值设置为gdt中的LDT段值，通过SelectorLDTCodeA跳入该LDT段中，此段通过设置TI位保证使用LDT表中的内容，
-
-值得注意的是，LDT表中不存在NULL
-SEGMENT，这可能是因为LDT需要预先处理的原因
-
-![](media/image31.png)&#123;width=&quot;3.625in&quot; height=&quot;0.78125in&quot;&#125;
-
-上述为程序执行结果，可以看到，程序正确执行了输出L命令
-
-我们仍然搬出下面这个图，用来说明LDT转换
-
-![](media/image1.png)&#123;width=&quot;5.7652777777777775in&quot;
-height=&quot;4.327083333333333in&quot;&#125;
-
-当TI位为1时，segment就会去寻找LDT表，该selector所对应的index被解释为LDT索引，在每一次LDT切换前，需要注意LDTR寄存器是否与所要切换的LDT保持一致。
-</code></pre>
-<h1 id="4-特权级切换以及段权限控制"><a href="#4-特权级切换以及段权限控制" class="headerlink" title="4.  特权级切换以及段权限控制"></a>4.  特权级切换以及段权限控制</h1><pre><code>特权级如下图所示：
-
-![](media/image32.png)&#123;width=&quot;5.092361111111111in&quot;
-height=&quot;4.15625in&quot;&#125;
-
-值得注意的是，如果一个违反特权级的行为发生了，同样会产生GP异常。
-
-![](media/image33.png)&#123;width=&quot;5.761111111111111in&quot;
-height=&quot;0.4708333333333333in&quot;&#125;
-
-CPL概念如下:
-
-![](media/image34.png)&#123;width=&quot;5.764583333333333in&quot;
-height=&quot;1.0291666666666666in&quot;&#125;
-
-简而言之，CPL是通过CS,SS在段表中的DPL控制的，一般来说，发生CS切换时，处理器会改变CPL的值(在一致性代码段下，CPL保持不变)
-
-DPL概念如下:
-
-![](media/image35.png)&#123;width=&quot;5.527083333333334in&quot;
-height=&quot;4.2340277777777775in&quot;&#125;
-
-RPL的概念如下:
-
-![](media/image36.png)&#123;width=&quot;5.759027777777778in&quot;
-height=&quot;1.0027777777777778in&quot;&#125;
-
-RPL是存放在cs，ds等寄存器中的权限级别，用于提供更高能力的权限控制
-
-整体工作流程如下:
-
-![](media/image37.png)&#123;width=&quot;5.759027777777778in&quot;
-height=&quot;2.9972222222222222in&quot;&#125;
-
-![](media/image38.png)&#123;width=&quot;5.7625in&quot;
-height=&quot;4.285416666666666in&quot;&#125;
-
-一般情况下可以认为是这样的：
-
-Max(CPL,RPL) &amp;lt;=DPL ? ACCESS : NOT ACCESS ;
-
-在门和其他一些情况下，可能会更加复杂
-
-6.调用门:
-
-![](media/image39.png)&#123;width=&quot;5.764583333333333in&quot;
-height=&quot;2.6506944444444445in&quot;&#125;
-
-![](media/image40.png)&#123;width=&quot;5.761111111111111in&quot;
-height=&quot;4.66875in&quot;&#125;
-
-在调用门中，原先程序的OFFSET并没有使用，而是使用CALL-GATE中的OFFSET与segment
-table中的BASE ADDR联合使用.
-
-对于d文件夹下的代码分析如下：
-
-![](media/image41.png)&#123;width=&quot;5.767361111111111in&quot;
-height=&quot;2.64375in&quot;&#125;
-
-在该程序中，CALL-GATE的DPL被设置为0，这说明只有特权级为0的程序才可以访问它，并且该门所指向的代码段是非一致性代码段，由于该门的offset为0，当特权级为0的代码调用CALL-GATE时，程序会指向CODE\_DEST的起始位置。
-
-![](media/image42.png)&#123;width=&quot;5.479166666666667in&quot;
-height=&quot;2.4479166666666665in&quot;&#125;
-
-该代码在c文件夹的代码的基础上，调用了CALL-GATE，从而指向SelectorCodeDest:0
-
-执行结果如下所示:
-
-![](media/image43.png)&#123;width=&quot;3.5520833333333335in&quot;
-height=&quot;1.0729166666666667in&quot;&#125;
-
-![](media/image44.png)&#123;width=&quot;5.764583333333333in&quot;
-height=&quot;3.463888888888889in&quot;&#125;
-
-TSS段的具体表现形式:
-
-![](media/image45.png)&#123;width=&quot;5.763888888888889in&quot;
-height=&quot;5.206944444444445in&quot;&#125;
-
-当一个CALL-GATE触发时，如果会产生向更高特权级的非一致性CODE
-SEGMENT的转换，那么一个会发生栈的转换，该转换通过TSS段来实现，通过读取TSS段中的相应特权级的段的栈位置，将栈转换到特定位置，当调用发生，这两个栈会发生的变化如下图所示:
-
-![](media/image46.png)&#123;width=&quot;5.759027777777778in&quot;
-height=&quot;2.803472222222222in&quot;&#125;
-
-有了上述的图像，下面的代码便不难解释:
-
-![](media/image47.png)&#123;width=&quot;5.7659722222222225in&quot;
-height=&quot;1.1201388888888888in&quot;&#125;
-
-该代码通过这几个push在0特权栈的栈上压入3特权栈的ss，esp，3特权代码段的cs，eip，通过retf长返回指令读取栈区内容，然后将指令转到特权级3所在的代码段上，从而实现从高特权级到低特权级的转换
-
-幸好，在特权级为3时，gs的DPL=3，可以正常运行
-
-![](media/image48.png)&#123;width=&quot;5.7659722222222225in&quot;
-height=&quot;2.759027777777778in&quot;&#125;
-
-所以，最后的结果为：
-
-![](media/image49.png)&#123;width=&quot;5.763194444444444in&quot;
-height=&quot;1.3256944444444445in&quot;&#125;
-
-实验解决问题:
-</code></pre>
+<p>实验解决问题:</p>
 <!-- -->
 
-<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><h1 id="1-GDT、Descriptor、Selector、GDTR结构，及其含义是什么？他们的关联关系如何？pm-inc所定义的宏怎么使用？"><a href="#1-GDT、Descriptor、Selector、GDTR结构，及其含义是什么？他们的关联关系如何？pm-inc所定义的宏怎么使用？" class="headerlink" title="1.  GDT、Descriptor、Selector、GDTR结构，及其含义是什么？他们的关联关系如何？pm.inc所定义的宏怎么使用？"></a>1.  GDT、Descriptor、Selector、GDTR结构，及其含义是什么？他们的关联关系如何？pm.inc所定义的宏怎么使用？</h1><pre><code>答，该问题已经在实验步骤1中已经进行了解答，此处不再赘述
-</code></pre>
+<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><h1 id="1-GDT、Descriptor、Selector、GDTR结构，及其含义是什么？他们的关联关系如何？pm-inc所定义的宏怎么使用？"><a href="#1-GDT、Descriptor、Selector、GDTR结构，及其含义是什么？他们的关联关系如何？pm-inc所定义的宏怎么使用？" class="headerlink" title="1.  GDT、Descriptor、Selector、GDTR结构，及其含义是什么？他们的关联关系如何？pm.inc所定义的宏怎么使用？"></a>1.  GDT、Descriptor、Selector、GDTR结构，及其含义是什么？他们的关联关系如何？pm.inc所定义的宏怎么使用？</h1><p>答，该问题已经在实验步骤1中已经进行了解答，此处不再赘述</p>
 <h1 id="2-从实模式到保护模式，关键步骤有哪些？为什么要关中断？为什么要打开A20地址线？从保护模式切换回实模式，又需要哪些步骤？"><a href="#2-从实模式到保护模式，关键步骤有哪些？为什么要关中断？为什么要打开A20地址线？从保护模式切换回实模式，又需要哪些步骤？" class="headerlink" title="2.从实模式到保护模式，关键步骤有哪些？为什么要关中断？为什么要打开A20地址线？从保护模式切换回实模式，又需要哪些步骤？"></a>2.从实模式到保护模式，关键步骤有哪些？为什么要关中断？为什么要打开A20地址线？从保护模式切换回实模式，又需要哪些步骤？</h1><p>答:该问题已经在实验步骤2中进行了解答，不再赘述</p>
 <p>附:A20地址线解答</p>
-<p><img src="/media/image50.png">{width&#x3D;”5.761111111111111in” height&#x3D;”1.78125in”}</p>
+<img src="/2024/10/12/OS-LAB-2/pic51.png" class title="截图">
+
 <p>可以说，A20作为回环地址，能够将实模式下的超出0XFFFF的内容舍去，而打开A20，可以让EIP进入32位模式</p>
 <h1 id="3解释不同权限代码的切换原理，call-jmp，retf使用场景如何，能够互换吗？"><a href="#3解释不同权限代码的切换原理，call-jmp，retf使用场景如何，能够互换吗？" class="headerlink" title="3解释不同权限代码的切换原理，call, jmp，retf使用场景如何，能够互换吗？"></a>3解释不同权限代码的切换原理，call, jmp，retf使用场景如何，能够互换吗？</h1><p>答:在实验步骤5中解答了不同权限代码的切换原理，接下来阐述call ，jmp<br>，retf的使用场景:</p>
 <p>Call：</p>
@@ -411,26 +336,33 @@ height=&quot;1.3256944444444445in&quot;&#125;
 <li><p>特权级代码段跳转 类似 call 代码段选择子:offset</p>
 </li>
 <li><p>通过task-gate的跳转</p>
+</li>
+</ol>
 <p>不同的call指令所执行的指令数不同。</p>
 <p>Call一般与ret指令配合使用，下面是call与return的配合:</p>
-<p><img src="/media/image51.png">{width&#x3D;”4.611111111111111in”<br>height&#x3D;”3.6243055555555554in”}</p>
-<p><img src="/media/image52.png">{width&#x3D;”5.204861111111111in”<br>height&#x3D;”4.647222222222222in”}</p>
-<p><img src="/media/image53.png">{width&#x3D;”5.759027777777778in”<br>height&#x3D;”1.4055555555555554in”}</p>
-<p><img src="/media/image54.png">{width&#x3D;”5.766666666666667in”<br>height&#x3D;”1.0381944444444444in”}</p>
-<p><img src="/media/image55.png">{width&#x3D;”5.761805555555555in”<br>height&#x3D;”1.051388888888889in”}</p>
-<p><img src="/media/image56.png">{width&#x3D;”5.760416666666667in”<br>height&#x3D;”0.8680555555555556in”}</p>
+<img src="/2024/10/12/OS-LAB-2/pic52.png" class title="截图">
+
+<img src="/2024/10/12/OS-LAB-2/pic53.png" class title="截图">
+
+<img src="/2024/10/12/OS-LAB-2/pic54.png" class title="截图">
+
+<img src="/2024/10/12/OS-LAB-2/pic55.png" class title="截图">
+
+<img src="/2024/10/12/OS-LAB-2/pic56.png" class title="截图">
+
+<img src="/2024/10/12/OS-LAB-2/pic57.png" class title="截图">
+
 <p>我认为jmp和call是无法互换的</p>
 <p>Jmp是一个跳转指令，它无法进行跨特权级的跳转，也就是说，无法进行栈的切换</p>
 <p>其次在call-gate特权级检查方面，jmp只能在同级之间转换，而call可以跨级别转换</p>
-<p><img src="/media/image57.png">{width&#x3D;”5.760416666666667in”<br>height&#x3D;”1.6256944444444446in”}</p>
+<img src="/2024/10/12/OS-LAB-2/pic58.png" class title="截图">
+
 <p>Call在设计上与ret有一定关联，而跳转指令没有</p>
-</li>
-</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://barrenham.github.io/2024/10/12/OS-LAB-2/" data-id="cm26c1y820000ssvcbbgicfld" data-title="OS_LAB 2" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://barrenham.github.io/2024/10/12/OS-LAB-2/" data-id="cm26dpklt0001lkvchy27g58z" data-title="OS_LAB 2" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
