@@ -6,12 +6,12 @@
   
   <title>OS_LAB 2 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="1.  段表设计GDT,LDT    一个32位系统需要一个GDT，可以同时拥有多个LDT,每一个LDT通过GDT来获取LDT所在的位置     在INTEL规范中，第一个GDT表项应该是不被使用的，当cpu试图通过该selector来读取内存时，会返回GP（general protection)错误，该表项是希望系统初始化selector指向该表项，并在之后进行更改，如果没有更改，那么selec">
+  <meta name="description" content="document.addEventListener(&#39;DOMContentLoaded&#39;, (event) &#x3D;&gt; {       const toc &#x3D; document.getElementById(&#39;toc&#39;);       const headers &#x3D; document.querySelectorAll(&#39;h1, h2, h3, h4, h5, h6&#39;);       l">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OS_LAB 2">
 <meta property="og:url" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1.  段表设计GDT,LDT    一个32位系统需要一个GDT，可以同时拥有多个LDT,每一个LDT通过GDT来获取LDT所在的位置     在INTEL规范中，第一个GDT表项应该是不被使用的，当cpu试图通过该selector来读取内存时，会返回GP（general protection)错误，该表项是希望系统初始化selector指向该表项，并在之后进行更改，如果没有更改，那么selec">
+<meta property="og:description" content="document.addEventListener(&#39;DOMContentLoaded&#39;, (event) &#x3D;&gt; {       const toc &#x3D; document.getElementById(&#39;toc&#39;);       const headers &#x3D; document.querySelectorAll(&#39;h1, h2, h3, h4, h5, h6&#39;);       l">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic1.png">
 <meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic2.png">
@@ -72,7 +72,7 @@
 <meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic57.png">
 <meta property="og:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic58.png">
 <meta property="article:published_time" content="2024-10-12T14:37:34.000Z">
-<meta property="article:modified_time" content="2024-10-12T16:36:02.362Z">
+<meta property="article:modified_time" content="2024-10-12T16:45:29.447Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://barrenham.github.io/2024/10/12/OS-LAB-2/pic1.png">
@@ -152,7 +152,49 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="1-段表设计GDT-LDT"><a href="#1-段表设计GDT-LDT" class="headerlink" title="1.  段表设计GDT,LDT"></a>1.  段表设计GDT,LDT</h1><img src="/2024/10/12/OS-LAB-2/pic1.png" class title="intel ia32手册截图 截图">  
+        <div id="toc"></div>  
+  
+<script>  
+document.addEventListener('DOMContentLoaded', (event) => {  
+    const toc = document.getElementById('toc');  
+    const headers = document.querySelectorAll('h1, h2, h3, h4, h5, h6');  
+    let tocContent = '<ul>';  
+    let currentLevel = 0;  
+    let stack = []; // 用于跟踪当前的嵌套级别  
+  
+    headers.forEach(header => {  
+        const level = parseInt(header.tagName.substring(1), 10);  
+        const text = header.innerText;  
+        const id = header.id || `toc-${Math.random().toString(36).substr(2, 9)}`;  
+        header.id = id; // 确保每个标题都有唯一的 ID  
+  
+        // 处理嵌套级别  
+        while (currentLevel > level) {  
+            stack.pop();  
+            tocContent += '</ul></li>';  
+            currentLevel--;  
+        }  
+  
+        while (currentLevel < level) {  
+            tocContent += '<ul><li>';  
+            stack.push('</li></ul>');  
+            currentLevel++;  
+        }  
+  
+        tocContent += `<li><a href="#${id}">${text}</a>`;  
+    });  
+  
+    // 关闭所有剩余的嵌套列表  
+    while (stack.length > 0) {  
+        tocContent += stack.pop();  
+    }  
+  
+    tocContent += '</ul>';  
+    toc.innerHTML = tocContent;  
+});  
+</script>  
+
+<h1 id="1-段表设计GDT-LDT"><a href="#1-段表设计GDT-LDT" class="headerlink" title="1.  段表设计GDT,LDT"></a>1.  段表设计GDT,LDT</h1><img src="/2024/10/12/OS-LAB-2/pic1.png" class title="intel ia32手册截图 截图">  
 
 <p>一个32位系统需要一个GDT，可以同时拥有多个LDT,每一个LDT通过GDT来获取LDT所在的位置  </p>
 <img src="/2024/10/12/OS-LAB-2/pic2.png" class>
@@ -372,6 +414,15 @@
     
 <nav id="article-nav">
   
+    <a href="/2024/10/13/web-net-class-1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          web-net class 1
+        
+      </div>
+    </a>
+  
   
     <a href="/2024/10/12/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
@@ -411,6 +462,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2024/10/13/web-net-class-1/">web-net class 1</a>
+          </li>
         
           <li>
             <a href="/2024/10/12/OS-LAB-2/">OS_LAB 2</a>

@@ -69,6 +69,82 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-web-net-class-1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/13/web-net-class-1/" class="article-date">
+  <time class="dt-published" datetime="2024-10-12T16:49:37.000Z" itemprop="datePublished">2024-10-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/13/web-net-class-1/">web-net class 1</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h1><h2 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h2><ol>
+<li>链路的管理</li>
+<li>帧定界</li>
+<li>流量的控制</li>
+<li>差错控制</li>
+<li>分离数据和控制信息</li>
+<li>透明传输</li>
+<li>寻址</li>
+</ol>
+<h2 id="以太网数据帧"><a href="#以太网数据帧" class="headerlink" title="以太网数据帧"></a>以太网数据帧</h2><p>以太网的数据帧格式如下图所示</p>
+
+
+<p>以太网帧的类型:</p>
+<p>0x0800：IPv4 : 指示该数据帧按ipv4处理</p>
+<p>0x0806：ARP : 用于ip地址到mac地址的转换，该以太帧一般出现在主机没有得到mac地址，向网络广播寻找mac的过程中</p>
+<p>0x8100：VLAN Tag（TPID）: 拥有VLAN tag的帧，该帧旨在指示该帧添加了一个字段，用于指示数据帧所在的vlan</p>
+<p>0x86DD：IPv6 : 指示该数据帧按ipv6处理</p>
+<p>0x88F7：PTP &#x2F; gPTP : 用于精确控制时间</p>
+<p>0x22F0：AVTP</p>
+<h2 id="数据链路层一个重要的物件-交换机"><a href="#数据链路层一个重要的物件-交换机" class="headerlink" title="数据链路层一个重要的物件: 交换机"></a>数据链路层一个重要的物件: 交换机</h2><p>VLAN机制</p>
+
+
+<p>在交换机之间传递过程中，需要使用VLAN tag的帧</p>
+<p>位于不同VLAN内的主机之间 <strong>不能</strong> 直接通信，需要通过路由器或三层交换机等网络层设备进行转发。</p>
+<p>VLAN接口是一种三层模式下的虚拟接口，主要用于实现VLAN间的三层互通，它不作为物理实体存在于交换机上。每个VLAN对应一个VLAN接口，该接口可以为本VLAN内端口收到的报文根据其目的IP地址在网络层进行转发。通常情况下，由于VLAN能够隔离广播域，因此每个VLAN也对应一个IP网段，VLAN接口将作为该网段的网关对需要跨网段转发的报文进行基于IP地址的三层转发。</p>
+<p>SFP机制</p>
+<p>简而言之，用于在交换机之中选举一个根交换机，允许该机上的所有端口通讯，其余交换机可以到达根交换机，但是有且仅有一条，通过阻塞端口实现</p>
+<p>转发表</p>
+
+
+
+<p>上述图片转自 H3C 交换机 操作手册</p>
+<p>工作模式:</p>
+<ol>
+<li>存储转发</li>
+<li>直接转发</li>
+<li>无碎片转发</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://barrenham.github.io/2024/10/13/web-net-class-1/" data-id="cm26e6ii900014ovc3gosfehw" data-title="web-net class 1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-OS-LAB-2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/10/12/OS-LAB-2/" class="article-date">
@@ -91,7 +167,49 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="1-段表设计GDT-LDT"><a href="#1-段表设计GDT-LDT" class="headerlink" title="1.  段表设计GDT,LDT"></a>1.  段表设计GDT,LDT</h1><img src="/2024/10/12/OS-LAB-2/pic1.png" class title="intel ia32手册截图 截图">  
+        <div id="toc"></div>  
+  
+<script>  
+document.addEventListener('DOMContentLoaded', (event) => {  
+    const toc = document.getElementById('toc');  
+    const headers = document.querySelectorAll('h1, h2, h3, h4, h5, h6');  
+    let tocContent = '<ul>';  
+    let currentLevel = 0;  
+    let stack = []; // 用于跟踪当前的嵌套级别  
+  
+    headers.forEach(header => {  
+        const level = parseInt(header.tagName.substring(1), 10);  
+        const text = header.innerText;  
+        const id = header.id || `toc-${Math.random().toString(36).substr(2, 9)}`;  
+        header.id = id; // 确保每个标题都有唯一的 ID  
+  
+        // 处理嵌套级别  
+        while (currentLevel > level) {  
+            stack.pop();  
+            tocContent += '</ul></li>';  
+            currentLevel--;  
+        }  
+  
+        while (currentLevel < level) {  
+            tocContent += '<ul><li>';  
+            stack.push('</li></ul>');  
+            currentLevel++;  
+        }  
+  
+        tocContent += `<li><a href="#${id}">${text}</a>`;  
+    });  
+  
+    // 关闭所有剩余的嵌套列表  
+    while (stack.length > 0) {  
+        tocContent += stack.pop();  
+    }  
+  
+    tocContent += '</ul>';  
+    toc.innerHTML = tocContent;  
+});  
+</script>  
+
+<h1 id="1-段表设计GDT-LDT"><a href="#1-段表设计GDT-LDT" class="headerlink" title="1.  段表设计GDT,LDT"></a>1.  段表设计GDT,LDT</h1><img src="/2024/10/12/OS-LAB-2/pic1.png" class title="intel ia32手册截图 截图">  
 
 <p>一个32位系统需要一个GDT，可以同时拥有多个LDT,每一个LDT通过GDT来获取LDT所在的位置  </p>
 <img src="/2024/10/12/OS-LAB-2/pic2.png" class>
@@ -393,6 +511,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2024/10/13/web-net-class-1/">web-net class 1</a>
+          </li>
         
           <li>
             <a href="/2024/10/12/OS-LAB-2/">OS_LAB 2</a>
