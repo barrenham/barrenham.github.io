@@ -13,10 +13,16 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="数据链路层主要功能 链路的管理 帧定界 流量的控制 差错控制 分离数据和控制信息 透明传输 寻址  以太网数据帧以太网的数据帧格式如下图所示   以太网帧的类型: 0x0800：IPv4 : 指示该数据帧按ipv4处理 0x0806：ARP : 用于ip地址到mac地址的转换，该以太帧一般出现在主机没有得到mac地址，向网络广播寻找mac的过程中 0x8100：VLAN Tag（TPID）: 拥有">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/13/web-net-class-1/pic1.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/13/web-net-class-1/pic2.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/13/web-net-class-1/pic3.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/13/web-net-class-1/pic4.png">
+<meta property="og:image" content="http://barrenham.github.io/2024/10/13/web-net-class-1/pic5.png">
 <meta property="article:published_time" content="2024-10-12T16:49:37.000Z">
-<meta property="article:modified_time" content="2024-10-13T06:24:59.046Z">
+<meta property="article:modified_time" content="2024-10-13T06:31:01.821Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://barrenham.github.io/2024/10/13/web-net-class-1/pic1.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -103,7 +109,7 @@
 <li>寻址</li>
 </ol>
 <h2 id="以太网数据帧"><a href="#以太网数据帧" class="headerlink" title="以太网数据帧"></a>以太网数据帧</h2><p>以太网的数据帧格式如下图所示</p>
-
+<img src="/2024/10/13/web-net-class-1/pic1.png" class>
 
 <p>以太网帧的类型:</p>
 <p>0x0800：IPv4 : 指示该数据帧按ipv4处理</p>
@@ -113,7 +119,7 @@
 <p>0x88F7：PTP &#x2F; gPTP : 用于精确控制时间</p>
 <p>0x22F0：AVTP</p>
 <h2 id="数据链路层一个重要的物件-交换机"><a href="#数据链路层一个重要的物件-交换机" class="headerlink" title="数据链路层一个重要的物件: 交换机"></a>数据链路层一个重要的物件: 交换机</h2><p>VLAN机制</p>
-
+<img src="/2024/10/13/web-net-class-1/pic2.png" class>
 
 <p>在交换机之间传递过程中，需要使用VLAN tag的帧</p>
 <p>位于不同VLAN内的主机之间 <strong>不能</strong> 直接通信，需要通过路由器或三层交换机等网络层设备进行转发。</p>
@@ -121,9 +127,9 @@
 <p>SFP机制</p>
 <p>简而言之，用于在交换机之中选举一个根交换机，允许该机上的所有端口通讯，其余交换机可以到达根交换机，但是有且仅有一条，通过阻塞端口实现</p>
 <p>转发表</p>
-
-
-
+<img src="/2024/10/13/web-net-class-1/pic3.png" class title="截图">
+<img src="/2024/10/13/web-net-class-1/pic4.png" class>
+<img src="/2024/10/13/web-net-class-1/pic5.png" class>
 <p>上述图片转自 H3C 交换机 操作手册</p>
 <p>工作模式:</p>
 <ol>
@@ -135,7 +141,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://barrenham.github.io/2024/10/13/web-net-class-1/" data-id="cm26e6ii900014ovc3gosfehw" data-title="web-net class 1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://barrenham.github.io/2024/10/13/web-net-class-1/" data-id="cm277j0i100023ovce19zgm75" data-title="web-net class 1" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
